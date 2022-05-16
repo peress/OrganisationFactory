@@ -1,11 +1,10 @@
 package com.pipedrive.challenge.entity;
 
+import java.io.Serializable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,12 +16,11 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "organisation", schema = "public")
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Organisation {
+public class Organisation implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "organisation_id_seq")
-    @SequenceGenerator(name = "organisation_id_seq", sequenceName = "organisation_id_seq", allocationSize = 1)
-    private Long id;
+    @EmbeddedId
+    private OrganisationId organisationId;
 
-    private String name;
+    @Transient
+    private String relationship;
 }

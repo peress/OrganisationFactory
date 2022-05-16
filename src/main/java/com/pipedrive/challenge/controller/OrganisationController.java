@@ -40,11 +40,11 @@ public class OrganisationController {
 
     @Operation(summary = "Retrieve all relations from given organisation")
     @GetMapping(path = "/relations/{organisationName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<OrganisationResponse> findOrganisation(@PathVariable String organisationName,
+    public ResponseEntity<List<OrganisationResponse>> findOrganisation(@PathVariable String organisationName,
                                                        @RequestParam(defaultValue = "0") Integer pageNumber) {
 
         log.info("Request received - findOrganisation");
 
-        return organisationService.fetchAllOrganisationRelatioons(organisationName, pageNumber);
+        return new ResponseEntity<>(organisationService.fetchAllOrganisationRelatioons(organisationName, pageNumber), HttpStatus.OK);
     }
 }
