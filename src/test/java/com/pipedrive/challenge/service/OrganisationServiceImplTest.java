@@ -83,6 +83,6 @@ class OrganisationServiceImplTest {
 
         Set<OrganisationResponse> actual = organisationService.fetchAllOrganisationRelatioons(anyString(), anyInt());
 
-        assertTrue(actual.contains(List.of(new OrganisationResponse("AB", RelationshipTypes.parent))));
+        assertTrue(actual.containsAll(List.of(new OrganisationResponse("AB", RelationshipTypes.parent))));
     }
 }
