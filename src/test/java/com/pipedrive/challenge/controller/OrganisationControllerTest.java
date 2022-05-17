@@ -19,8 +19,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pipedrive.challenge.model.OrganisationRequest;
 import com.pipedrive.challenge.model.OrganisationResponse;
 import com.pipedrive.challenge.service.OrganisationServiceImpl;
 
@@ -33,11 +31,6 @@ class OrganisationControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Captor
-    ArgumentCaptor<OrganisationRequest> organisationCaptur;
     @Captor
     ArgumentCaptor<String> organisationNameCaptor;
     @Captor
@@ -64,7 +57,8 @@ class OrganisationControllerTest {
 /*
     @Test
     void createEmptyOrganisation() {
-
+    //TODO dont allow organisations whitout name
+    //TODO allow organisation whitout children
         try {
 
             mockMvc.perform(post("/v1/organisations")
