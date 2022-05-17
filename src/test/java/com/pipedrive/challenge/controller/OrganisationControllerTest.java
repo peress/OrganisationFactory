@@ -61,6 +61,22 @@ class OrganisationControllerTest {
             fail();
         }
     }
+/*
+    @Test
+    void createEmptyOrganisation() {
+
+        try {
+
+            mockMvc.perform(post("/v1/organisations")
+                            .contentType(MediaType.APPLICATION_JSON_VALUE)
+                            .content("{}")
+                            .accept(MediaType.APPLICATION_JSON_VALUE))
+                    .andExpect(status().isBadRequest())
+                    .andReturn();
+        } catch (Exception e) {
+            fail();
+        }
+    }*/
 
     @Test
     void organisationRelations() {

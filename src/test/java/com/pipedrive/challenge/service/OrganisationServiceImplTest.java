@@ -37,38 +37,6 @@ class OrganisationServiceImplTest {
     ArgumentCaptor<Set<Organisation>> organisationSetCaptor;
 
     @Test
-    void createEmptyOrganisation() {
-        OrganisationRequest req = new OrganisationRequest();
-
-        when(organisationRepository.saveAll(organisationSetCaptor.capture()))
-                .thenAnswer(i -> i.getArguments()[0]);
-
-        organisationService.createOrganisation(req);
-
-        assertTrue(organisationSetCaptor.getValue().contains(Set.of(
-                Organisation.builder().build())));
-    }
-
-    @Test
-    void createSingleOrganisation() {
-        OrganisationRequest req = new OrganisationRequest("AB");
-
-        when(organisationRepository.saveAll(organisationSetCaptor.capture()))
-                .thenAnswer(i -> i.getArguments()[0]);
-
-        organisationService.createOrganisation(req);
-
-        assertTrue(organisationSetCaptor.getValue().contains(Set.of(
-                Organisation.builder()
-                        .organisationId(
-                                OrganisationId.builder()
-                                        .name("AB")
-                                        .childName("")
-                                        .build())
-                        .build())));
-    }
-
-    @Test
     void createOrganisation() {
 
         OrganisationRequest req = new OrganisationRequest("AB");
@@ -115,6 +83,6 @@ class OrganisationServiceImplTest {
 
         Set<OrganisationResponse> actual = organisationService.fetchAllOrganisationRelatioons(anyString(), anyInt());
 
-        assertTrue(actual.containsAll(List.of(new OrganisationResponse("AB", RelationshipTypes.parent))));
+        assertTrue(actual.contains(List.of(new OrganisationResponse("AB", RelationshipTypes.parent))));
     }
 }
