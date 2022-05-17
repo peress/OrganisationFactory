@@ -1,7 +1,6 @@
 package com.pipedrive.challenge.service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.data.domain.PageRequest;
@@ -28,7 +27,7 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     @Override
-    public List<OrganisationResponse> fetchAllOrganisationRelatioons(String organisationName, Integer pageNumber) {
+    public Set<OrganisationResponse> fetchAllOrganisationRelatioons(String organisationName, Integer pageNumber) {
         return organisationRepository.findOrganisationRelationships(
                         organisationName,
                         PageRequest.of(pageNumber, OrganisationRepository.PAGE_SIZE))
@@ -39,7 +38,7 @@ public class OrganisationServiceImpl implements OrganisationService {
                                 .name(organisation.getName())
                                 .relationshipType(organisation.getRelationship())
                                 .build())
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     private void findAllOrganisations(Set<Organisation> organisations, String parent, OrganisationRequest organisationRequest) {

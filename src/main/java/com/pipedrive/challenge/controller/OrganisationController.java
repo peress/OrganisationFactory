@@ -1,6 +1,6 @@
 package com.pipedrive.challenge.controller;
 
-import java.util.List;
+import java.util.Set;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,19 +29,17 @@ public class OrganisationController {
 
     @Operation(summary = "Create a new organisation")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createOrganisation(@RequestBody @NonNull OrganisationRequest organisationRequest) {
+    public void createOrganisation(@RequestBody @NonNull OrganisationRequest organisationRequest) {
 
         log.info("Request received - createOrganisation");
 
         organisationService.createOrganisation(organisationRequest);
-
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Operation(summary = "Retrieve all relations from given organisation")
-    @GetMapping(path = "/relations/{organisationName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<OrganisationResponse>> findOrganisation(@PathVariable String organisationName,
-                                                       @RequestParam(defaultValue = "0") Integer pageNumber) {
+    @GetMapping(path = "/relation/{organisationName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<OrganisationResponse>> findOrganisationRelations(@PathVariable String organisationName,
+                                                                               @RequestParam(defaultValue = "0") Integer pageNumber) {
 
         log.info("Request received - findOrganisation");
 

@@ -13,7 +13,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrganisationRequest {
 
-    @JsonProperty("org_name")
+    @JsonProperty(required = true, value = "org_name")
     private String name;
+
     private List<OrganisationRequest> daughters;
+
+    public OrganisationRequest(String name) {
+        this.name = name;
+    }
 }
