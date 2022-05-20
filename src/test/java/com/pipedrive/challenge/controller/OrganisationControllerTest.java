@@ -2,6 +2,7 @@ package com.pipedrive.challenge.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -19,6 +20,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import com.pipedrive.challenge.model.OrganisationRequest;
 import com.pipedrive.challenge.model.OrganisationResponse;
 import com.pipedrive.challenge.service.OrganisationServiceImpl;
 
@@ -35,6 +37,8 @@ class OrganisationControllerTest {
     ArgumentCaptor<String> organisationNameCaptor;
     @Captor
     ArgumentCaptor<Integer> pageNumberCaptor;
+    @Captor
+    ArgumentCaptor<OrganisationRequest> organisationRequestArgumentCaptor;
 
     private static final String ORGANISATION_NAME = "Laranjas e Bananas";
     private static final int PAGE_NUMBER = 0;
@@ -43,6 +47,7 @@ class OrganisationControllerTest {
     void createOrganisation() {
 
         try {
+            doNothing().when(organisationService).createOrganisation(organisationRequestArgumentCaptor.capture());
 
             mockMvc.perform(post("/v1/organisations")
                             .contentType(MediaType.APPLICATION_JSON_VALUE)
