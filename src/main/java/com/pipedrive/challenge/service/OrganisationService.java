@@ -10,6 +10,5 @@ public interface OrganisationService {
     @Transactional
     void createOrganisation(OrganisationRequest organisation);
 
-    @Transactional
     Set<OrganisationResponse> fetchAllOrganisationRelatioons(String organisationName, Integer pageNumber);
 }

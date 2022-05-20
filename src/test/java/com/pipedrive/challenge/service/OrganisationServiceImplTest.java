@@ -22,7 +22,7 @@ import com.pipedrive.challenge.model.OrganisationRequest;
 import com.pipedrive.challenge.model.OrganisationResponse;
 import com.pipedrive.challenge.model.RelationshipTypes;
 import com.pipedrive.challenge.repository.OrganisationRepository;
-import com.pipedrive.challenge.view.OrganisationRelationshipsView;
+import com.pipedrive.challenge.model.OrganisationRelationshipsProjection;
 
 @ExtendWith(MockitoExtension.class)
 class OrganisationServiceImplTest {
@@ -66,7 +66,7 @@ class OrganisationServiceImplTest {
 
     @Test
     void fetchAllOrganisationRelatioons() {
-        OrganisationRelationshipsView projection = new OrganisationRelationshipsView() {
+        OrganisationRelationshipsProjection projection = new OrganisationRelationshipsProjection() {
             @Override
             public String getName() {
                 return "AB";

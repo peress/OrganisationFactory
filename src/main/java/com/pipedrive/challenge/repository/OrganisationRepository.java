@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.pipedrive.challenge.entity.Organisation;
-import com.pipedrive.challenge.view.OrganisationRelationshipsView;
+import com.pipedrive.challenge.model.OrganisationRelationshipsProjection;
 
 @Repository
 public interface OrganisationRepository extends CrudRepository<Organisation, Long> {
@@ -22,5 +22,5 @@ public interface OrganisationRepository extends CrudRepository<Organisation, Lon
             "name in (select name from organisation where child_name = :name ) " +
             "and child_name <> :name " +
             "order by name", nativeQuery = true)
-    Slice<OrganisationRelationshipsView> findOrganisationRelationships(@Param("name") String organisationName, Pageable pageable);
+    Slice<OrganisationRelationshipsProjection> findOrganisationRelationships(@Param("name") String organisationName, Pageable pageable);
 }

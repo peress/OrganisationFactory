@@ -62,9 +62,9 @@ class OrganisationControllerTest {
         try {
 
             mockMvc.perform(post("/v1/organisations")
-                            .contentType(MediaType.APPLICATION_JSON_VALUE)
+                            .contentType(MediaType.APPLICATION_JSON)
                             .content("{}")
-                            .accept(MediaType.APPLICATION_JSON_VALUE))
+                            .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isBadRequest())
                     .andReturn();
         } catch (Exception e) {
